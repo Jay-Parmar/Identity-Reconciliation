@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['id-recon.onrender.com']
+ALLOWED_HOSTS = ['id-recon.onrender.com', '127.0.0.1']
 
 
 # Application definition
@@ -78,12 +78,23 @@ ASGI_APPLICATION = 'id_recon.asgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        # Replace this value with your local database's connection string.
-        default='postgres://id_recon_dvwp_user:op1nIDx8j9Xkeg0X1zoq9OgXVcY0Ho5X@dpg-cpcth0u74orc73f5lc20-a/id_recon_dvwp',
-        conn_max_age=600
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT'),
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgres://id_recon_dvwp_user:op1nIDx8j9Xkeg0X1zoq9OgXVcY0Ho5X@dpg-cpcth0u74orc73f5lc20-a/id_recon_dvwp',
+#         conn_max_age=600
+#     )
+# }
 
 
 # Password validation
