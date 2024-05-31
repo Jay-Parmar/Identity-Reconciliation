@@ -76,14 +76,7 @@ WSGI_APPLICATION = 'id_recon.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT'),
-    }
+    'default': 'postgres://id_recon_dvwp_user:op1nIDx8j9Xkeg0X1zoq9OgXVcY0Ho5X@dpg-cpcth0u74orc73f5lc20-a/id_recon_dvwp'
 }
 
 
