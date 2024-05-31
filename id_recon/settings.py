@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -77,7 +78,11 @@ ASGI_APPLICATION = 'id_recon.asgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': 'postgres://id_recon_dvwp_user:op1nIDx8j9Xkeg0X1zoq9OgXVcY0Ho5X@dpg-cpcth0u74orc73f5lc20-a/id_recon_dvwp'
+    'default': dj_database_url.config(
+        # Replace this value with your local database's connection string.
+        default='postgres://id_recon_dvwp_user:op1nIDx8j9Xkeg0X1zoq9OgXVcY0Ho5X@dpg-cpcth0u74orc73f5lc20-a/id_recon_dvwp',
+        conn_max_age=600
+    )
 }
 
 
