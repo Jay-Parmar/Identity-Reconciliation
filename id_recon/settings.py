@@ -69,7 +69,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'id_recon.wsgi.application'
+# WSGI_APPLICATION = 'id_recon.wsgi.application'
+ASGI_APPLICATION = 'id_recon.asgi.application'
 
 
 # Database
