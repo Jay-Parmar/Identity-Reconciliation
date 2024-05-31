@@ -54,13 +54,12 @@ class IdentifyContactView(APIView):
                     contact.save()
 
             # Populate response data
-            # TODO: bring the primary email phone and email to the front
             emails = {c.email for c in all_linked_contacts if c.email}
             if email:
                 emails = emails | {email}
             phones = {c.phone_number for c in all_linked_contacts if c.phone_number}
             if phone_number:
-                phones = phones | {phone_number}
+                phones = phones | {str(phone_number)}
             secondary_contacts = [c.id for c in all_linked_contacts if c.id != primary_contact.id]
 
             # Add a node if no node is present with the exact values
@@ -77,8 +76,10 @@ class IdentifyContactView(APIView):
             response_data = {
                 'contact': ContactReturnSerializer({
                     'primaryContactId': primary_contact.id,
-                    'emails': list(emails),
-                    'phoneNumbers': list(phones),
+                    'emails': ([primary_contact.email] if primary_contact.email else []) + \
+                        list(emails - {primary_contact.email}),
+                    'phoneNumbers': ([str(primary_contact.phone_number)] if primary_contact.phone_number else []) + \
+                        list(phones - {str(primary_contact.phone_number)}),
                     'secondaryContactIds': secondary_contacts
                 }).data
             }
